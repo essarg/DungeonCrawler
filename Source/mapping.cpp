@@ -42,7 +42,7 @@ void CollisionDetection(int i)
                            ++p)
 	{
 		if (dbSpriteHit(i, *p))
-			dbMoveSprite(i,-1);
+			dbMoveSprite(i,-moveSpeed);
 	}
 	
 }
