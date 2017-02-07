@@ -2,7 +2,7 @@
     Dark GDK - 2D Game : DungeonCrawler Project Overview
 ========================================================================
 
-Dark GDK - 2D Game has created this DungeonCrawler project for you as a starting point.
+Dark GDK - DungeonCrawler project.
 
 This file contains a summary of what you will find in each of the files that make up your project.
 
