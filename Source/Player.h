@@ -2,6 +2,6 @@
 
 	
 	void PlayerMove();
-	
+	void CreateAntSprite();
 	
 	

@@ -1,39 +1,43 @@
 #include "Player.h"
 #include "mapping.h"
-#include "DarkSDK.h"
+#include "DarkGDK.h"
 #include "Global.h"
 #include <vector>
 #include "dinput.h"
 
 
+void CreateAntSprite()
+{
+	dbCreateAnimatedSprite (iAnt, "AntAnimNew.bmp", 4, 2, iAnt);
+	dbOffsetSprite(iAnt, 24, 24);
+	dbSprite (iAnt,20,608,iAnt);
+}
 
 void PlayerMove()
 {
-	
-		int i = 10;
-		if (dbKeyState(DIK_D) && dbSpriteX(i) < 608)
+		if (dbKeyState(DIK_D) && dbSpriteX(iAnt) < 608)
 		{
-			dbRotateSprite(i,90);
-			dbMoveSprite(i,moveSpeed);
-			dbPlaySprite(i,1,6,60);
+			dbRotateSprite(iAnt,90);
+			dbMoveSprite(iAnt,moveSpeed);
+			dbPlaySprite(iAnt,1,6,60);
 		}
-		else if (dbKeyState(DIK_W) && dbSpriteY(i) > 32)
+		else if (dbKeyState(DIK_W) && dbSpriteY(iAnt) > 32)
 		{
-			dbRotateSprite(i,0);
-			dbMoveSprite(i,moveSpeed);
-			dbPlaySprite(i,1,6,60);
+			dbRotateSprite(iAnt,0);
+			dbMoveSprite(iAnt,moveSpeed);
+			dbPlaySprite(iAnt,1,6,60);
 		}
-		else if (dbKeyState(DIK_S) && dbSpriteY(i) < 608)
+		else if (dbKeyState(DIK_S) && dbSpriteY(iAnt) < 608)
 		{
-			dbRotateSprite(i,180);
-			dbMoveSprite(i,moveSpeed);
-			dbPlaySprite(i,1,6,60);
+			dbRotateSprite(iAnt,180);
+			dbMoveSprite(iAnt,moveSpeed);
+			dbPlaySprite(iAnt,1,6,60);
 		}
-		else if (dbKeyState(DIK_A) && dbSpriteX(i) > 32)
+		else if (dbKeyState(DIK_A) && dbSpriteX(iAnt) > 32)
 		{
-			dbRotateSprite(i,-90);
-			dbMoveSprite(i,moveSpeed);
-			dbPlaySprite(i,1,6,60);
+			dbRotateSprite(iAnt,-90);
+			dbMoveSprite(iAnt,moveSpeed);
+			dbPlaySprite(iAnt,1,6,60);
 		}
-		CollisionDetection(i);
+		CollisionDetection();
 }

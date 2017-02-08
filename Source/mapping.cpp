@@ -1,5 +1,5 @@
 #include <vector>
-#include "DarkSDK.h"
+#include "DarkGDK.h"
 #include "Global.h"
 #include "Player.h"
 #include "mapping.h"
@@ -35,14 +35,14 @@ void DrawMap()
 	
 }
 
-void CollisionDetection(int i)
+void CollisionDetection()
 {
 	for (std::vector<int>::iterator p = collisionVector.begin();
 		p != collisionVector.end();
                            ++p)
 	{
-		if (dbSpriteHit(i, *p))
-			dbMoveSprite(i,-moveSpeed);
+		if (dbSpriteHit(iAnt, *p))
+			dbMoveSprite(iAnt,-moveSpeed);
 	}
 	
 }
