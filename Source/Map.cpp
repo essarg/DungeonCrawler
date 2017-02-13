@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Map.h"
 
+
 std::vector<int> collisionVector;
 int leftEdge = minLeftEdge;
 int topEdge = minTopEdge;
@@ -75,6 +76,7 @@ void Map::DrawMap()
 		{
 			dbSprite(sprMap + spriteIndex, viewMap[i].X - leftEdge, viewMap[i].Y - topEdge, (viewMap[i].Type));
 			if (viewMap[i].Type == iWall) collisionVector.push_back(sprMap+spriteIndex);
+			//if (viewMap[i].Type == iWall) SC_SetupObject(sprMap+spriteIndex, 3, 0);
 
 			spriteIndex++;
 		}
@@ -103,17 +105,20 @@ void Map::DrawMap()
 }
 
 
-void Map::CollisionDetection()
+bool Map::CollisionDetection()
 {
-	
 	for (std::vector<int>::iterator p = collisionVector.begin();
 		p != collisionVector.end();
                            ++p)
 	{
 		if (dbSpriteHit(sprAnt, *p))
-			dbMoveSprite(sprAnt,-moveSpeed);
+		{
+			collisionVector.clear();
+			return true;
+		}
 	}
 	collisionVector.clear();
+	return false;
 }
 
 
