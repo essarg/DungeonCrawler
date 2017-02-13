@@ -103,7 +103,7 @@ void Map::DrawMap()
 }
 
 
-void Map::CollisionDetection()
+void Map::CollisionDetection(float X, float Y)
 {
 	
 	for (std::vector<int>::iterator p = collisionVector.begin();
@@ -111,7 +111,7 @@ void Map::CollisionDetection()
                            ++p)
 	{
 		if (dbSpriteHit(sprAnt, *p))
-			dbMoveSprite(sprAnt,-moveSpeed);
+			dbSprite(sprAnt,X,Y,iAnt);
 	}
 	collisionVector.clear();
 }

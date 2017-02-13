@@ -3,6 +3,7 @@
 #include "DarkGDK.h"
 #include "Map.h"
 #include "Player.h"
+#include "Timer.h"
 
 
 
@@ -42,30 +43,37 @@ void DarkGDK ( void )
 	//dbRandomize ( dbTimer ( ) ); //--I don't know if I'll need a randomizer yet
 
 	SetAntStart();
+
 	Map map;
-	
+
+	Timer timer;
+	timer.Start();
+
 	player = new PlayerAnt(antStartX, antStartY);
 
 	
 	map.ProcessMap();
 
-	//int lastLeftEdge, lastTopEdge;
+	float playerPos(0);
+	float timeDiff(0);
 	
 
 	// now we come to our main loop, we call LoopGDK so some internal
 	// work can be carried out by the GDK
 	while ( LoopGDK ( ) )
 	{
+		
+		timeDiff = timer.UpdateTimer();
 
-		player->PlayerMove(leftEdge);
+		player->PlayerMove(timeDiff);
 
-		leftEdge = int(dbSpriteX(sprAnt)) - mapW / 2;
+		leftEdge = int(player->GetXPos() + 0.5) - mapW / 2;
 		if(leftEdge < minLeftEdge){
 			leftEdge = minLeftEdge;}
 		else if (leftEdge > maxLeftEdge){
 			leftEdge = maxLeftEdge;}	
 		
-		topEdge = int(dbSpriteY(sprAnt)) - mapH / 2;
+		topEdge = int(player->GetYPos() + 0.5) - mapH / 2;
 		if(topEdge < minTopEdge) topEdge = minTopEdge;
 		else if (topEdge > maxTopEdge) topEdge = maxTopEdge;
 
