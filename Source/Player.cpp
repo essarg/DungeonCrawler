@@ -1,43 +1,64 @@
 #include "Player.h"
-#include "mapping.h"
+#include "Map.h"
 #include "DarkGDK.h"
 #include "Global.h"
 #include <vector>
 #include "dinput.h"
 
 
-void CreateAntSprite()
+PlayerAnt::PlayerAnt(float antStartX, float antStartY):
+
+	antPosX(0), antPosY(0), antLastPosX(0),
+	antLastPosY(0), antStartPosX(antStartX), antStartPosY(antStartY)
 {
-	dbCreateAnimatedSprite (iAnt, "AntAnimNew.bmp", 4, 2, iAnt);
-	dbOffsetSprite(iAnt, 24, 24);
-	dbSprite (iAnt,20,608,iAnt);
+	dbCreateAnimatedSprite (sprAnt,"AntAnimNew.bmp",4,2,iAnt);
+	dbOffsetSprite(sprAnt,24,24);
+	dbSprite (sprAnt,antStartPosX+24,antStartPosY+24,iAnt);
+	dbSetSprite(sprAnt,1,1);
+	dbSetSpritePriority(sprAnt,priAnt);
 }
 
-void PlayerMove()
+PlayerAnt::~PlayerAnt()
 {
-		if (dbKeyState(DIK_D) && dbSpriteX(iAnt) < 608)
+	dbDeleteSprite(sprAnt);
+	dbDeleteImage(iAnt);
+}
+
+
+
+void PlayerAnt::PlayerMove()
+{
+		if (dbKeyState(DIK_D) && dbSpriteX(sprAnt) < maxAntXPos)
 		{
-			dbRotateSprite(iAnt,90);
-			dbMoveSprite(iAnt,moveSpeed);
-			dbPlaySprite(iAnt,1,6,60);
+			dbRotateSprite(sprAnt,90);
+			dbMoveSprite(sprAnt,moveSpeed);
+			dbPlaySprite(sprAnt,1,8,60);
 		}
-		else if (dbKeyState(DIK_W) && dbSpriteY(iAnt) > 32)
+		else if (dbKeyState(DIK_W) && dbSpriteY(sprAnt) > minAntYPos)
 		{
-			dbRotateSprite(iAnt,0);
-			dbMoveSprite(iAnt,moveSpeed);
-			dbPlaySprite(iAnt,1,6,60);
+			dbRotateSprite(sprAnt,0);
+			dbMoveSprite(sprAnt,moveSpeed);
+			dbPlaySprite(sprAnt,1,8,60);
 		}
-		else if (dbKeyState(DIK_S) && dbSpriteY(iAnt) < 608)
+		else if (dbKeyState(DIK_S) && dbSpriteY(sprAnt) < maxAntYPos)
 		{
-			dbRotateSprite(iAnt,180);
-			dbMoveSprite(iAnt,moveSpeed);
-			dbPlaySprite(iAnt,1,6,60);
+			dbRotateSprite(sprAnt,180);
+			dbMoveSprite(sprAnt,moveSpeed);
+			dbPlaySprite(sprAnt,1,8,60);
 		}
-		else if (dbKeyState(DIK_A) && dbSpriteX(iAnt) > 32)
+		else if (dbKeyState(DIK_A) && dbSpriteX(sprAnt) > minAntXPos)
 		{
-			dbRotateSprite(iAnt,-90);
-			dbMoveSprite(iAnt,moveSpeed);
-			dbPlaySprite(iAnt,1,6,60);
+			dbRotateSprite(sprAnt,-90);
+			dbMoveSprite(sprAnt,moveSpeed);
+			dbPlaySprite(sprAnt,1,8,60);
 		}
-		CollisionDetection();
+		
+		// Detect collisions with wall
+		Map::CollisionDetection();
+
+		antLastPosX = dbSpriteX(sprAnt);
+		antLastPosY = dbSpriteY(sprAnt);
+
+		// idle animation to be 'Really Good' for Dr. B
+		dbPlaySprite(sprAnt,5,6,600);
 }

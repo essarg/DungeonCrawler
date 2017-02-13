@@ -3,20 +3,60 @@
 /*******************
 **** Definitions ***
 *******************/
-#define MAP_HEIGHT 11
-#define MAP_WIDTH  10
-#define moveSpeed 4
-// Sprite iID for animation, probably can move to player.h
-#define iAnt 10
 
-// level map array
-const char mapArray[MAP_WIDTH][MAP_HEIGHT] ={	"WWWWWWWWWX",
-												"WFFFFWFWFF",
-												"WFWWFFFWFW",
-												"WFFFWWFWFW",
-												"WWWFWWFWFW",
-												"WWWFFWFWFW",
-												"WWWWFWFWFW",
-												"WWFFFWFFFW",
-												"FFFWWWWWWW",
-												"EWWWWWWWWW" };
+#define DIRECTINPUT_VERSION 0x0800
+// Game map height and width
+#define MAP_WIDTH  31
+#define MAP_HEIGHT 20
+
+
+
+/******************
+**** Constants ****
+******************/
+
+enum spriteID {sprAnt = 1, sprMap};
+enum imageID {iAnt = 1, iFloor, iWall};
+enum idPriorities {priMap = 1, priAnt };
+// Sets mapsize and width and height of map sprites
+const int mapW = 640, mapH = 640, sprW = 64, sprH = 64;
+const int tileCount = (MAP_WIDTH - 1) * MAP_HEIGHT;
+
+// Limit screenscrolling by setting min and max map edges.
+const int minLeftEdge = 0, maxLeftEdge = ((MAP_WIDTH-1) * sprW) - mapW,
+		  minTopEdge = 0, maxTopEdge = (MAP_HEIGHT * sprH) - mapH;
+
+
+/** Limit the player movement: minimum is the left edge and top of the map area
+*** Starts at 32 so half the sprite can't walk out of the map.
+*** maximum is the right and bottom edge of the map area
+*** minus one half sprite so half the sprite doesn't walk out of the map.
+**/
+
+const int minAntXPos = 32, maxAntXPos = 9.5 * sprW;
+const int minAntYPos = 32, maxAntYPos = 9.5 * sprH;
+
+// sets player movement speed in pixels per second
+const float moveSpeed = 5;
+
+// level map arrayW
+const char mapArray[MAP_HEIGHT][MAP_WIDTH] ={	"EWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+												"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFFFFFFFFFFFFFFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+												"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWX"};
