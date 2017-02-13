@@ -26,34 +26,27 @@ PlayerAnt::~PlayerAnt()
 
 
 
-void PlayerAnt::SetAntPos(float X, float Y)
-{
-	antPosX = antLastPosX = antStartPosX = X;
-	antPosY = antLastPosY = antStartPosY = Y;
-}
-
-
 void PlayerAnt::PlayerMove()
 {
-		if (dbKeyState(DIK_D) && dbSpriteX(sprAnt) < maxPlayerXPos)
+		if (dbKeyState(DIK_D) && dbSpriteX(sprAnt) < maxAntXPos)
 		{
 			dbRotateSprite(sprAnt,90);
 			dbMoveSprite(sprAnt,moveSpeed);
 			dbPlaySprite(sprAnt,1,8,60);
 		}
-		else if (dbKeyState(DIK_W) && dbSpriteY(sprAnt) > minPlayerYPos)
+		else if (dbKeyState(DIK_W) && dbSpriteY(sprAnt) > minAntYPos)
 		{
 			dbRotateSprite(sprAnt,0);
 			dbMoveSprite(sprAnt,moveSpeed);
 			dbPlaySprite(sprAnt,1,8,60);
 		}
-		else if (dbKeyState(DIK_S) && dbSpriteY(sprAnt) < maxPlayerYPos)
+		else if (dbKeyState(DIK_S) && dbSpriteY(sprAnt) < maxAntYPos)
 		{
 			dbRotateSprite(sprAnt,180);
 			dbMoveSprite(sprAnt,moveSpeed);
 			dbPlaySprite(sprAnt,1,8,60);
 		}
-		else if (dbKeyState(DIK_A) && dbSpriteX(sprAnt) > minPlayerXPos)
+		else if (dbKeyState(DIK_A) && dbSpriteX(sprAnt) > minAntXPos)
 		{
 			dbRotateSprite(sprAnt,-90);
 			dbMoveSprite(sprAnt,moveSpeed);

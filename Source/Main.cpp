@@ -35,42 +35,45 @@ void DarkGDK ( void )
 	dbSetDisplayMode(1024,768,32);
 	dbSetWindowTitle("Ant in a Dungeon");
 	dbSetWindowLayout(0,1,0);
-	//dbSetWindowPosition(46,46);
+	dbSetWindowPosition(46,46);
 	dbAutoCamOff();
 	dbDrawSpritesLast();
 	//dbRandomize ( dbTimer ( ) ); //--I don't know if I'll need a randomizer yet
 
 	SetAntStart();
 	Map map;
-	
+	map.ProcessMap();
 	player = new PlayerAnt(antStartX, antStartY);
 
-	map.ProcessMap();
+	
 	
 
-	int lastLeftEdge = leftEdge, lastTopEdge = topEdge;
+	//int lastLeftEdge, lastTopEdge;
 	
 
 	// now we come to our main loop, we call LoopGDK so some internal
 	// work can be carried out by the GDK
 	while ( LoopGDK ( ) )
 	{
+
+		player->PlayerMove();
+
 		leftEdge = int(dbSpriteX(sprAnt) + 0.5) - mapW / 2;
 		if(leftEdge < minLeftEdge){
 			leftEdge = minLeftEdge;}
 		else if (leftEdge > maxLeftEdge){
 			leftEdge = maxLeftEdge;}
-		lastLeftEdge = leftEdge;
+		//lastLeftEdge = leftEdge;
 	
 		topEdge = int(dbSpriteY(sprAnt) + 0.5) - mapH / 2;
 		if(topEdge < minTopEdge) topEdge = minTopEdge;
 		else if (topEdge > maxTopEdge) topEdge = maxTopEdge;
-		lastTopEdge = topEdge;
+		//lastTopEdge = topEdge;
+		
+		
+		
 		
 		map.DrawMap();
-		player->PlayerMove();
-		
-		
 		dbSync ( );
 	}
 

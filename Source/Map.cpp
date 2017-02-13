@@ -5,8 +5,8 @@
 #include "Map.h"
 
 std::vector<int> collisionVector;
-int leftEdge = minLeftEdge, diffLeftEdge = 0;
-int topEdge = minTopEdge, diffTopEdge = 0;
+int leftEdge = minLeftEdge;
+int topEdge = minTopEdge;
 int maxNumSprites = 0;	
 
 struct TileMap
@@ -59,7 +59,7 @@ int tileIndex = 0;
 }
 
 
-
+//
 void Map::DrawMap()
 {
 	// Go through all tiles in the level.
@@ -67,6 +67,7 @@ void Map::DrawMap()
 
 	for (int i = 0; i < tileCount; i++)
 	{
+		
 		// Draw only those sprites which are within the visible screen area.
 		// Which image has to be drawn is determined by the type of the tile.
 		if (viewMap[i].X >= (leftEdge - sprW) && viewMap[i].X <= (leftEdge + mapW) &&
@@ -83,22 +84,22 @@ void Map::DrawMap()
 	// set the transparency (false), backsave (false) and priority of the new sprites, 
 	// then adjust the maximum.
 	// This way, the properties are only set once for each ground sprite.
-	/** if (spriteIndex > maxNumSprites) {
+	 if (spriteIndex > maxNumSprites) {
 		for (int i = maxNumSprites; i < spriteIndex; i++) {
 			dbSetSprite(sprMap + i, 0, 0);
 			dbSetSpritePriority(sprMap + i, priMap);
 		}
 		maxNumSprites = spriteIndex;
-	}*/
+	}
 
 	
 	// If we needed less sprites for this screen, then hide the surplus sprites
 	// by placing them outside the visible screen area. (We could use dbHideSprite as well,
 	// but this way, we don't need to call dbShowSprite for all the visible sprites every loop.)
-	/**for (int i = spriteIndex; i < maxNumSprites; i++) {
+	for (int i = spriteIndex; i < maxNumSprites; i++) {
 		
 		dbSprite(sprMap + i, -mapW, -mapH, iFloor);
-	}*/
+	}
 }
 
 
@@ -112,7 +113,7 @@ void Map::CollisionDetection()
 		if (dbSpriteHit(sprAnt, *p))
 			dbMoveSprite(sprAnt,-moveSpeed);
 	}
-	
+	collisionVector.clear();
 }
 
 

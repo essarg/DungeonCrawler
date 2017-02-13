@@ -11,8 +11,6 @@ public:
 
 	
 	// Set the (starting) position of the player.
-	void SetAntStart();
-	void SetAntPos(float X, float Y);
 	void PlayerMove();
 	
 	// This sets the new coordinates of the player, according to movement keys pressed.

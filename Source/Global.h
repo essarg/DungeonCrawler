@@ -6,7 +6,7 @@
 
 #define DIRECTINPUT_VERSION 0x0800
 // Game map height and width
-#define MAP_WIDTH  21
+#define MAP_WIDTH  31
 #define MAP_HEIGHT 20
 
 
@@ -23,7 +23,7 @@ const int mapW = 640, mapH = 640, sprW = 64, sprH = 64;
 const int tileCount = (MAP_WIDTH - 1) * MAP_HEIGHT;
 
 // Limit screenscrolling by setting min and max map edges.
-const int minLeftEdge = 0, maxLeftEdge = ((MAP_WIDTH - 1) * sprW) - mapW,
+const int minLeftEdge = 0, maxLeftEdge = ((MAP_WIDTH-1) * sprW) - mapW,
 		  minTopEdge = 0, maxTopEdge = (MAP_HEIGHT * sprH) - mapH;
 
 
@@ -33,30 +33,30 @@ const int minLeftEdge = 0, maxLeftEdge = ((MAP_WIDTH - 1) * sprW) - mapW,
 *** minus one half sprite so half the sprite doesn't walk out of the map.
 **/
 
-const int minPlayerXPos = 32, maxPlayerXPos = 9.5 * sprW;
-const int minPlayerYPos = 32, maxPlayerYPos = 9.5 * sprH;
+const int minAntXPos = 32, maxAntXPos = 9.5 * sprW;
+const int minAntYPos = 32, maxAntYPos = 9.5 * sprH;
 
 // sets player movement speed in pixels per second
 const float moveSpeed = 5;
 
-// level map array
-const char mapArray[MAP_HEIGHT][MAP_WIDTH] ={	"EWWWWWWWWWWWWWWWWWWW",
-												"FFFFFFFFFFWFFFFFFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFFFFFFFFFFFFFFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFW",
-												"WFFFWWFFFWWFFFWWFFFF",
-												"WWWWWWWWWWWWWWWWWWWX"  };
+// level map arrayW
+const char mapArray[MAP_HEIGHT][MAP_WIDTH] ={	"EWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+												"FFFFFFFFFFFFFFFFFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFFFFFFFFFFFFFFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFWWFFFWWFFFWWFFFFFFFFFFFFFW",
+												"WFFFFFFFFFFFFFFFFFFFFFFFFFFFFF",
+												"WWWWWWWWWWWWWWWWWWWWWWWWWWWWWX"};
