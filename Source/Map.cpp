@@ -22,7 +22,9 @@ TileMap* viewMap;
 Map::Map()
 {
 	dbLoadImage ( "Floor.bmp", iFloor);
+	//dbSprite(sprFloor, -64,-64, iFloor);
 	dbLoadImage ( "Wall.bmp", iWall);
+	//dbSprite(sprWall, -64,-64, iWall);
 	dbSetImageColorKey ( 255, 0, 255 );
 }
 
@@ -75,11 +77,13 @@ void Map::DrawMap()
 			viewMap[i].Y >= (topEdge - sprH) && viewMap[i].Y <= (topEdge + mapH) )
 		{
 			dbSprite(sprMap + spriteIndex, viewMap[i].X - leftEdge, viewMap[i].Y - topEdge, (viewMap[i].Type));
-			if (viewMap[i].Type == iWall) collisionVector.push_back(sprMap+spriteIndex);
-			//if (viewMap[i].Type == iWall) SC_SetupObject(sprMap+spriteIndex, 3, 0);
-
-			spriteIndex++;
+			if (viewMap[i].Type == iWall) 
+			
+				collisionVector.push_back(sprMap + spriteIndex);
+			
 		}
+			spriteIndex++;
+	
 	}
 
 	// If we created more sprites than the maximum so far: 
@@ -100,7 +104,7 @@ void Map::DrawMap()
 	// but this way, we don't need to call dbShowSprite for all the visible sprites every loop.)
 	for (int i = spriteIndex; i < maxNumSprites; i++) {
 		
-		dbSprite(sprMap + i, -mapW, -mapH, iFloor);
+		dbSprite(sprMap + i, -mapW*10, -mapH*10, 0);
 	}
 }
 

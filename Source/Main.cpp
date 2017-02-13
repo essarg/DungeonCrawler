@@ -35,7 +35,7 @@ void DarkGDK ( void )
 
 	dbSyncOn   ( );
 	dbSyncRate (60);
-	dbSetDisplayMode(640,640,32);
+	dbSetDisplayMode(1024,768,32);
 	dbSetWindowTitle("Ant in a Dungeon");
 	dbSetWindowLayout(0,1,0);
 	dbSetWindowPosition(46,46);
