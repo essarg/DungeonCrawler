@@ -7,6 +7,7 @@
 
 
 
+
 PlayerAnt* player = 0;
 int antStartX, antStartY;
 int minX = minAntXPos, maxX = maxAntXPos, minY = minAntYPos, maxY = maxAntYPos;

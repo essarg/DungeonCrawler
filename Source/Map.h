@@ -14,7 +14,7 @@ public:
 	void DrawMap();
 	
 	void GetTile(char, int, int, int);
-	static void CollisionDetection(float, float);
+	static bool CollisionDetection();
 
 };
 

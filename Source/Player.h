@@ -24,7 +24,8 @@ public:
 
 private:
 	float antPosX, antPosY;
-	float antLastPosX, antLastPosY, antStartPosX, antStartPosY;
+	float antLastPosX, antLastPosY;
+	bool stopped;
 
 }; 
 	
