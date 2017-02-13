@@ -6,7 +6,7 @@
 #include "dinput.h"
 
 
-PlayerAnt::PlayerAnt(float antStartX, float antStartY):
+PlayerAnt::PlayerAnt(int antStartX, int antStartY):
 
 	antPosX(0), antPosY(0), antLastPosX(0),
 	antLastPosY(0), antStartPosX(antStartX), antStartPosY(antStartY)
@@ -26,8 +26,11 @@ PlayerAnt::~PlayerAnt()
 
 
 
-void PlayerAnt::PlayerMove()
+void PlayerAnt::PlayerMove(int leftEdge)
 {
+	antStartPosX = dbSpriteX(sprAnt);
+	antStartPosY = dbSpriteY(sprAnt);
+
 		if (dbKeyState(DIK_D) && dbSpriteX(sprAnt) < maxAntXPos)
 		{
 			dbRotateSprite(sprAnt,90);
@@ -56,9 +59,7 @@ void PlayerAnt::PlayerMove()
 		// Detect collisions with wall
 		Map::CollisionDetection();
 
-		antLastPosX = dbSpriteX(sprAnt);
-		antLastPosY = dbSpriteY(sprAnt);
-
 		// idle animation to be 'Really Good' for Dr. B
 		dbPlaySprite(sprAnt,5,6,600);
 }
+

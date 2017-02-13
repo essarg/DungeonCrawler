@@ -1,17 +1,18 @@
 #pragma once
 
 
+
 class PlayerAnt
 {
 public:
 	// The constructor and destructor will create/delete
 	// the player image and player sprite.
-	 PlayerAnt(float antStartX, float antStartY);
+	 PlayerAnt(int, int);
 	~PlayerAnt();
 
 	
 	// Set the (starting) position of the player.
-	void PlayerMove();
+	void PlayerMove(int);
 	
 	// This sets the new coordinates of the player, according to movement keys pressed.
 	// It returns the current X position of the player.

@@ -7,7 +7,8 @@
 
 
 PlayerAnt* player = 0;
-float antStartX, antStartY;
+int antStartX, antStartY;
+int minX = minAntXPos, maxX = maxAntXPos, minY = minAntYPos, maxY = maxAntYPos;
 
 void SetAntStart()
 {
@@ -32,7 +33,7 @@ void DarkGDK ( void )
 
 	dbSyncOn   ( );
 	dbSyncRate (60);
-	dbSetDisplayMode(1024,768,32);
+	dbSetDisplayMode(640,640,32);
 	dbSetWindowTitle("Ant in a Dungeon");
 	dbSetWindowLayout(0,1,0);
 	dbSetWindowPosition(46,46);
@@ -42,11 +43,11 @@ void DarkGDK ( void )
 
 	SetAntStart();
 	Map map;
-	map.ProcessMap();
+	
 	player = new PlayerAnt(antStartX, antStartY);
 
 	
-	
+	map.ProcessMap();
 
 	//int lastLeftEdge, lastTopEdge;
 	
@@ -56,22 +57,19 @@ void DarkGDK ( void )
 	while ( LoopGDK ( ) )
 	{
 
-		player->PlayerMove();
+		player->PlayerMove(leftEdge);
 
-		leftEdge = int(dbSpriteX(sprAnt) + 0.5) - mapW / 2;
+		leftEdge = int(dbSpriteX(sprAnt)) - mapW / 2;
 		if(leftEdge < minLeftEdge){
 			leftEdge = minLeftEdge;}
 		else if (leftEdge > maxLeftEdge){
-			leftEdge = maxLeftEdge;}
-		//lastLeftEdge = leftEdge;
-	
-		topEdge = int(dbSpriteY(sprAnt) + 0.5) - mapH / 2;
+			leftEdge = maxLeftEdge;}	
+		
+		topEdge = int(dbSpriteY(sprAnt)) - mapH / 2;
 		if(topEdge < minTopEdge) topEdge = minTopEdge;
 		else if (topEdge > maxTopEdge) topEdge = maxTopEdge;
-		//lastTopEdge = topEdge;
-		
-		
-		
+
+	
 		
 		map.DrawMap();
 		dbSync ( );

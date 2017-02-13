@@ -4,20 +4,22 @@
 **** Definitions ***
 *******************/
 
+//dinput definition
 #define DIRECTINPUT_VERSION 0x0800
+
 // Game map height and width
 #define MAP_WIDTH  31
 #define MAP_HEIGHT 20
-
-
 
 /******************
 **** Constants ****
 ******************/
 
+
 enum spriteID {sprAnt = 1, sprMap};
 enum imageID {iAnt = 1, iFloor, iWall};
-enum idPriorities {priMap = 1, priAnt };
+enum PriorityID {priMap = 1, priAnt };
+
 // Sets mapsize and width and height of map sprites
 const int mapW = 640, mapH = 640, sprW = 64, sprH = 64;
 const int tileCount = (MAP_WIDTH - 1) * MAP_HEIGHT;
@@ -33,8 +35,7 @@ const int minLeftEdge = 0, maxLeftEdge = ((MAP_WIDTH-1) * sprW) - mapW,
 *** minus one half sprite so half the sprite doesn't walk out of the map.
 **/
 
-const int minAntXPos = 32, maxAntXPos = 9.5 * sprW;
-const int minAntYPos = 32, maxAntYPos = 9.5 * sprH;
+const int minAntXPos = 32, maxAntXPos = 9.5 * sprW, minAntYPos = 32, maxAntYPos = 9.5 * sprH;
 
 // sets player movement speed in pixels per second
 const float moveSpeed = 5;
