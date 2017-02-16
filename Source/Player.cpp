@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "Map.h"
-#include "DarkGDK.h"
+#include "DarkSDK.h"
 #include "Global.h"
 #include <vector>
 #include "dinput.h"
@@ -28,11 +28,14 @@ PlayerAnt::~PlayerAnt()
 
 void PlayerAnt::PlayerMove(float timeDiff)
 {
-	
-	
+	// set starting speed to 0
 	int speedX = 0, speedY = 0;
 	
-	
+	/*************************************************
+	*** catch keypress disallows diagonal movement ***
+	*** Key press rotates ant sprite to desired    ***
+	*** direction, then plays the*/
+
 		if (dbKeyState(DIK_D) && dbSpriteX(sprAnt) < maxAntXPos)
 		{
 			dbRotateSprite(sprAnt,90);
@@ -81,8 +84,8 @@ void PlayerAnt::PlayerMove(float timeDiff)
 					antPosY = dbSpriteY(sprAnt)+topEdge;
 		}
 		// idle animation to be 'Really Good' for Dr. B
-		dbPlaySprite(sprAnt,5,6,600);
-		stopped = false;
+		dbPlaySprite(sprAnt,4,6,600);
+		//stopped = false;
 }
 
 int PlayerAnt::GetXPos()
