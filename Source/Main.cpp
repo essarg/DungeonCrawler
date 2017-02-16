@@ -37,10 +37,10 @@ void DarkGDK ( void )
 	dbSyncRate (60);
 	dbSetDisplayMode(1024,768,32);
 	dbSetWindowTitle("Ant in a Dungeon");
-	dbSetWindowLayout(0,1,0);
+	dbSetWindowLayout(1,1,1);
 	dbSetWindowPosition(46,46);
 	dbAutoCamOff();
-	dbDrawSpritesLast();
+	dbDrawSpritesFirst();
 	//dbRandomize ( dbTimer ( ) ); //--I don't know if I'll need a randomizer yet
 
 	SetAntStart();
@@ -54,6 +54,7 @@ void DarkGDK ( void )
 
 	
 	map.ProcessMap();
+	
 
 	float playerPos(0);
 	float timeDiff(0);
@@ -77,10 +78,10 @@ void DarkGDK ( void )
 		topEdge = int(player->GetYPos() + 0.5) - mapH / 2;
 		if(topEdge < minTopEdge) topEdge = minTopEdge;
 		else if (topEdge > maxTopEdge) topEdge = maxTopEdge;
-
 	
-		
 		map.DrawMap();
+		map.DrawBorder();
+
 		dbSync ( );
 	}
 
@@ -89,7 +90,7 @@ void DarkGDK ( void )
 	
 	// delete all the sprites
 	delete player;
-	// delete the backdrop image
+	// delete the bac image
 	map.~Map();
 
 	// and now everything is ready to return back to Windows

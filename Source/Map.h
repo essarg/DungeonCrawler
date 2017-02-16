@@ -12,6 +12,7 @@ public:
 	
 	void ProcessMap();
 	void DrawMap();
+	void DrawBorder();
 	
 	void GetTile(char, int, int, int);
 	static bool CollisionDetection();

@@ -1,6 +1,6 @@
 #include "Player.h"
 #include "Map.h"
-#include "DarkGDK.h"
+#include "DarkSDK.h"
 #include "Global.h"
 #include <vector>
 #include "dinput.h"

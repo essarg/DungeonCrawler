@@ -16,17 +16,17 @@
 ******************/
 
 
-enum spriteID {sprAnt = 1, sprMap};
+enum spriteID {sprAnt = 1, sprMap, sprWall};
 enum imageID {iAnt = 1, iFloor, iWall};
-enum PriorityID {priMap = 1, priAnt };
+enum PriorityID {priMap = 1, priAnt, priWall};
 
 // Sets mapsize and width and height of map sprites
 const int mapW = 640, mapH = 640, sprW = 64, sprH = 64;
-const int tileCount = (MAP_WIDTH - 1) * MAP_HEIGHT;
+const int tileCount = (MAP_WIDTH - 1) * (MAP_HEIGHT);
 
 // Limit screenscrolling by setting min and max map edges.
 const int minLeftEdge = 0, maxLeftEdge = ((MAP_WIDTH-1) * sprW) - mapW,
-		  minTopEdge = 0, maxTopEdge = (MAP_HEIGHT * sprH) - mapH;
+		  minTopEdge = 0, maxTopEdge = ((MAP_HEIGHT) * sprH) - mapH;
 
 
 /** Limit the player movement: minimum is the left edge and top of the map area
