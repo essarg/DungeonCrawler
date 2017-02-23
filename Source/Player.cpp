@@ -2,7 +2,6 @@
 #include "Map.h"
 #include "DarkSDK.h"
 #include "Global.h"
-#include <vector>
 #include "dinput.h"
 
 
@@ -63,6 +62,8 @@ void PlayerAnt::PlayerMove(float timeDiff)
 		
 		if (speedX != 0)
 		{
+			if(dbKeyState(DIK_LSHIFT))
+				speedX = speedX*2;
 			antPosX += speedX * timeDiff;
 			if (antPosX < minAntXPos) antPosX = minAntXPos;
 			else if (antPosX > maxAntXPos) antPosX = maxAntXPos;
@@ -70,6 +71,8 @@ void PlayerAnt::PlayerMove(float timeDiff)
 
 		if (speedY != 0)
 		{
+			if(dbKeyState(DIK_LSHIFT))
+				speedY = speedY*2;
 			antPosY += speedY * timeDiff;
 			if (antPosX < minAntYPos) antPosY = minAntYPos;
 			else if (antPosY > maxAntYPos) antPosY = maxAntYPos;
@@ -79,7 +82,7 @@ void PlayerAnt::PlayerMove(float timeDiff)
 		stopped = Map::CollisionDetection();
 		if(stopped)
 		{
-					dbMoveSprite(sprAnt,-4);
+					dbMoveSprite(sprAnt,-8);
 					antPosX = dbSpriteX(sprAnt)+leftEdge;
 					antPosY = dbSpriteY(sprAnt)+topEdge;
 		}

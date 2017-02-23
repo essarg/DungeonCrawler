@@ -91,11 +91,11 @@ void Map::DrawMap()
 		if (viewMap[i].X >= (leftEdge - sprW) && viewMap[i].X <= (leftEdge + mapW) &&
 			viewMap[i].Y >= (topEdge - sprH) && viewMap[i].Y <= (topEdge + mapH) )
 		{
-			if (viewMap[i].Type == iEntrance)
+			/**if (viewMap[i].Type == iEntrance)
 			{
 				dbOffsetSprite(sprMap+spriteIndex,63,63);
 				dbRotateSprite(sprMap + spriteIndex, 180);
-			}
+			}*/
 			dbSprite(sprMap + spriteIndex, viewMap[i].X - leftEdge, viewMap[i].Y - topEdge, (viewMap[i].Type));
 			if (viewMap[i].Type == iWall)
 				collisionVector.push_back(sprMap + spriteIndex);

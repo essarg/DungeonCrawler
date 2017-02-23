@@ -61,7 +61,7 @@ void DarkGDK ( void )
 	player = new PlayerAnt(antStartX, antStartY);
 	
 	//create enemy on the map
-	CreateEnemy();
+	//CreateEnemy();
 
 	// read map array and load map to memory
 	map.ProcessMap();
@@ -82,7 +82,7 @@ void DarkGDK ( void )
 		player->PlayerMove(timeDiff);
 		
 		//update the enemy(right now this just animates)
-		UpdateEnemy();
+		//UpdateEnemy();
 		
 		//Calculate map position for viewable window
 		leftEdge = int(player->GetXPos() + 0.5) - mapW / 2;
