@@ -2,29 +2,34 @@
 
 void CreateEnemy();
 void UpdateEnemy();
+void DestroyEnemy();
+
 
 class EnemyEgg
 {
 public:
 	// The constructor and destructor will create/delete
 	// the player image and player sprite.
-	 EnemyEgg(int, int);
+	 EnemyEgg();
 	~EnemyEgg();
 
 	
-	void EnemyMove();
+	void EnemyMove(int, int);
 	void KillEnemy(EnemyEgg);
-	//static void ChickenCollision();
+	int GetSprID();
+	static bool ChickenCollision(int);
 
-	int GetXPos();
-	int GetYPos();
+	int GetEnemyPosX();
+	int GetEnemyPosY();
+	
 	static int enemyCount;
+	
 	
 private:
 	int sprThisEgg;
 	float eggPosX, eggPosY;
-	bool onWall, stopped;
-
+	bool onWall,bumped;
+	
 }; 
 	
 	

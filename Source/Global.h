@@ -35,13 +35,15 @@ const int minLeftEdge = 0, maxLeftEdge = ((MAP_WIDTH-1) * sprW) - mapW,
 *** minus one half sprite so half the sprite doesn't walk out of the map.
 **/
 
-const int minAntXPos = 32, maxAntXPos = (MAP_WIDTH - 1.5) * sprW, minAntYPos = 32, maxAntYPos = (MAP_HEIGHT - 0.5) * sprH;
+const int minXPos = 32, maxXPos = (MAP_WIDTH - 1.5) * sprW, minYPos = 32, maxYPos = (MAP_HEIGHT - 0.5) * sprH;
 
 // sets player movement speed in pixels per second
 const float moveSpeed = 180.0;
 
+const int maxEnemy = 5;
+
 // level map arrayW
-const char mapArray[MAP_HEIGHT][MAP_WIDTH] ={	"WEWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+const char mapArray[MAP_HEIGHT][MAP_WIDTH] ={	"WWWWWWWWWWWWWWWWWWWWWWWWWWWWEWWWWWW",
 												"WFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFW",
 												"WFFWWWFFWWWWWFWFFFFWFWWWFFFFFFFFFFW",
 												"WFWFFFWFWFFFFFWWFFFWFWFFWFFFFFFFFFW",

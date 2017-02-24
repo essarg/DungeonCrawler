@@ -10,7 +10,7 @@ PlayerAnt::PlayerAnt(int antStartX, int antStartY):
 	antPosX(antStartX+32), antPosY(antStartY+32), stopped(false)
 {
 	dbCreateAnimatedSprite (sprAnt,"AntAnimNew.bmp",4,2,iAnt);
-	dbScaleSprite(sprAnt,90);
+	dbScaleSprite(sprAnt,85);
 	dbOffsetSprite(sprAnt,24,24);
 	dbSprite (sprAnt,antPosX,antPosY,iAnt);
 	dbSetSprite(sprAnt,1,1);
@@ -35,25 +35,25 @@ void PlayerAnt::PlayerMove(float timeDiff)
 	*** Key press rotates ant sprite to desired    ***
 	*** direction, then plays the*/
 
-		if (dbKeyState(DIK_D) && dbSpriteX(sprAnt) < maxAntXPos)
+		if (dbKeyState(DIK_D) && dbSpriteX(sprAnt) < maxXPos)
 		{
 			dbRotateSprite(sprAnt,90);
 			dbPlaySprite(sprAnt,1,8,60);
 			speedX += moveSpeed;
 		}
-		else if (dbKeyState(DIK_W) && dbSpriteY(sprAnt) > minAntYPos)
+		else if (dbKeyState(DIK_W) && dbSpriteY(sprAnt) > minYPos)
 		{
 			dbRotateSprite(sprAnt,0);
 			dbPlaySprite(sprAnt,1,8,60);
 			speedY -= moveSpeed;
 		}
-		else if (dbKeyState(DIK_S) && dbSpriteY(sprAnt) < maxAntYPos)
+		else if (dbKeyState(DIK_S) && dbSpriteY(sprAnt) < maxYPos)
 		{
 			dbRotateSprite(sprAnt,180);
 			dbPlaySprite(sprAnt,1,8,60);
 			speedY += moveSpeed;
 		}
-		else if (dbKeyState(DIK_A) && dbSpriteX(sprAnt) > minAntXPos)
+		else if (dbKeyState(DIK_A) && dbSpriteX(sprAnt) > minXPos)
 		{
 			dbRotateSprite(sprAnt,-90);
 			dbPlaySprite(sprAnt,1,8,60);
@@ -65,8 +65,8 @@ void PlayerAnt::PlayerMove(float timeDiff)
 			if(dbKeyState(DIK_LSHIFT))
 				speedX = speedX*2;
 			antPosX += speedX * timeDiff;
-			if (antPosX < minAntXPos) antPosX = minAntXPos;
-			else if (antPosX > maxAntXPos) antPosX = maxAntXPos;
+			if (antPosX < minXPos) antPosX = minXPos;
+			else if (antPosX > maxXPos) antPosX = maxXPos;
 		}
 
 		if (speedY != 0)
@@ -74,12 +74,12 @@ void PlayerAnt::PlayerMove(float timeDiff)
 			if(dbKeyState(DIK_LSHIFT))
 				speedY = speedY*2;
 			antPosY += speedY * timeDiff;
-			if (antPosX < minAntYPos) antPosY = minAntYPos;
-			else if (antPosY > maxAntYPos) antPosY = maxAntYPos;
+			if (antPosX < minYPos) antPosY = minYPos;
+			else if (antPosY > maxYPos) antPosY = maxYPos;
 		}
 		
 		dbSprite(sprAnt, antPosX - leftEdge, antPosY - topEdge, iAnt);
-		stopped = Map::CollisionDetection();
+		stopped = Map::CollisionDetection(sprAnt);
 		if(stopped)
 		{
 					dbMoveSprite(sprAnt,-8);
@@ -88,7 +88,6 @@ void PlayerAnt::PlayerMove(float timeDiff)
 		}
 		// idle animation to be 'Really Good' for Dr. B
 		dbPlaySprite(sprAnt,4,6,600);
-		//stopped = false;
 }
 
 int PlayerAnt::GetXPos()

@@ -13,7 +13,7 @@ PlayerAnt* player = 0;
 
 // create variables for maintaining map in window
 int antStartX, antStartY;
-int minX = minAntXPos, maxX = maxAntXPos, minY = minAntYPos, maxY = maxAntYPos;
+int minX = minXPos, maxX = maxXPos, minY = minYPos, maxY = maxYPos;
 
 
 // Look through map array and set ant to start position
@@ -33,19 +33,21 @@ for (int h = 0; h < MAP_HEIGHT; h++)
 	}
 }
 
+void CallMap(PlayerAnt*, Map&);
+
 // the main entry point for the application is this function
 void DarkGDK ( void )
 {
 
-	dbSyncOn   ( );
-	dbSyncRate (60);
+	dbSyncOn();
+	dbSyncRate(60);
 	dbSetDisplayMode(1024,768,32);
 	dbSetWindowTitle("Ant in a Dungeon");
 	dbSetWindowLayout(1,1,1);
 	dbSetWindowPosition(46,46);
 	dbAutoCamOff();
 	dbDrawSpritesFirst();
-	//dbRandomize ( dbTimer ( ) ); //--I don't know if I'll need a randomizer yet
+	dbRandomize(dbTimer());
 
 	// call ant starting position function
 	SetAntStart();
@@ -60,12 +62,13 @@ void DarkGDK ( void )
 	//create new player with starting position
 	player = new PlayerAnt(antStartX, antStartY);
 	
-	//create enemy on the map
-	//CreateEnemy();
-
 	// read map array and load map to memory
 	map.ProcessMap();
+	//draw border to hide scroll remnants
 	
+	CallMap(player, map);
+
+	CreateEnemy();
 	//create player position and time for map scrolling
 	float playerPos(0);
 	float timeDiff(0);
@@ -82,24 +85,10 @@ void DarkGDK ( void )
 		player->PlayerMove(timeDiff);
 		
 		//update the enemy(right now this just animates)
-		//UpdateEnemy();
+		UpdateEnemy();
 		
-		//Calculate map position for viewable window
-		leftEdge = int(player->GetXPos() + 0.5) - mapW / 2;
-		if(leftEdge < minLeftEdge){
-			leftEdge = minLeftEdge;}
-		else if (leftEdge > maxLeftEdge){
-			leftEdge = maxLeftEdge;}	
+		CallMap(player, map);
 		
-		topEdge = int(player->GetYPos() + 0.5) - mapH / 2;
-		if(topEdge < minTopEdge) topEdge = minTopEdge;
-		else if (topEdge > maxTopEdge) topEdge = maxTopEdge;
-	
-		//draw moveable map
-		map.DrawMap();
-		//draw border to hide scroll remnants
-		map.DrawBorder();
-
 		dbSync ( );
 	}
 
@@ -108,7 +97,7 @@ void DarkGDK ( void )
 	
 	// delete player
 	delete player;
-	
+	DestroyEnemy();	
 	// delete the map
 	map.~Map();
 
@@ -116,3 +105,21 @@ void DarkGDK ( void )
 	return;
 }
 
+void CallMap(PlayerAnt *player, Map &map)
+{
+		//Calculate map position for viewable window
+
+	leftEdge = int(player->GetXPos() + 0.5) - mapW / 2;
+		if(leftEdge < minLeftEdge){
+			leftEdge = minLeftEdge;}
+		else if (leftEdge > maxLeftEdge){
+			leftEdge = maxLeftEdge;}	
+		
+	topEdge = int(player->GetYPos() + 0.5) - mapH / 2;
+		if(topEdge < minTopEdge) topEdge = minTopEdge;
+		else if (topEdge > maxTopEdge) topEdge = maxTopEdge;
+	
+		//draw moveable map
+		map.DrawMap();
+		map.DrawBorder();
+}

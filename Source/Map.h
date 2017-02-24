@@ -15,7 +15,7 @@ public:
 	void DrawBorder();
 	
 	void GetTile(char, int, int, int);
-	static bool CollisionDetection();
+	static bool CollisionDetection(int);
 
 };
 

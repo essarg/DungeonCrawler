@@ -4,6 +4,7 @@
 #include "Global.h"
 #include "Player.h"
 #include "Map.h"
+#include "Enemy.h"
 
 
 std::vector<int> collisionVector;
@@ -90,12 +91,7 @@ void Map::DrawMap()
 		// Which image has to be drawn is determined by the type of the tile.
 		if (viewMap[i].X >= (leftEdge - sprW) && viewMap[i].X <= (leftEdge + mapW) &&
 			viewMap[i].Y >= (topEdge - sprH) && viewMap[i].Y <= (topEdge + mapH) )
-		{
-			/**if (viewMap[i].Type == iEntrance)
-			{
-				dbOffsetSprite(sprMap+spriteIndex,63,63);
-				dbRotateSprite(sprMap + spriteIndex, 180);
-			}*/
+		{			
 			dbSprite(sprMap + spriteIndex, viewMap[i].X - leftEdge, viewMap[i].Y - topEdge, (viewMap[i].Type));
 			if (viewMap[i].Type == iWall)
 				collisionVector.push_back(sprMap + spriteIndex);
@@ -107,8 +103,10 @@ void Map::DrawMap()
 	// set the transparency (false), backsave (false) and priority of the new sprites, 
 	// then adjust the maximum.
 	// This way, the properties are only set once for each ground sprite.
-	 if (spriteIndex > maxNumSprites) {
-		for (int i = maxNumSprites; i < spriteIndex; i++) {
+	 if (spriteIndex > maxNumSprites) 
+	 {
+		for (int i = maxNumSprites; i < spriteIndex; i++) 
+		{
 			dbSetSprite(sprMap + i, 0, 0);
 			dbSetSpritePriority(sprMap + i, priMap);
 		}
@@ -123,6 +121,7 @@ void Map::DrawMap()
 		
 		dbSprite(sprMap + i, -mapW*2, -mapH*2, 0);
 	}
+	
 	dbText(900,128,dbStr(maxNumSprites));
 }
 
@@ -148,13 +147,13 @@ void Map::DrawBorder()
 	
 }
 
-bool Map::CollisionDetection()
+bool Map::CollisionDetection(int sprCheck)
 {
 	for (std::vector<int>::iterator p = collisionVector.begin();
 		p != collisionVector.end();
                            ++p)
 	{
-		if (dbSpriteHit(sprAnt, *p))
+		if (dbSpriteCollision(sprCheck, *p))
 		{
 			return true;
 		}

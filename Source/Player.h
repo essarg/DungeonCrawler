@@ -2,7 +2,7 @@
 
 
 
-class PlayerAnt
+class PlayerAnt 
 {
 public:
 	// The constructor and destructor will create/delete
